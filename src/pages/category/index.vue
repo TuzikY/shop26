@@ -1,11 +1,15 @@
 <template>
-  <div>分类</div>
+  <view>
+    <search></search>
+  </view>
 </template>
 
 <script>
-
+import Search from '@/components/search'
 export default {
-
+  components: {
+    Search
+  }
 }
 </script>
 

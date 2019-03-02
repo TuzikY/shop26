@@ -1,11 +1,7 @@
 <template>
   <div class="index">
-      <!-- 头部 -->
-    <div class="header">
-      <div class="search">
-        <icon type="search" size="24"/>搜索
-      </div>
-    </div>
+    <!-- 头部 -->
+    <search></search>
     <!-- 轮播图 -->
     <swiper indicator-dots autoplay circular indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff">
       <block v-for="item in swiperList" :key="item">
@@ -36,8 +32,12 @@
 </template>
 
 <script>
-import request from '../../utils/request.js'
+import {getSwiper,getCate,getFloor} from '@/api'
+import Search from '@/components/search'
 export default {
+  components: {
+    Search
+  },
   data () {
     return {
       swiperList:[],
@@ -46,13 +46,22 @@ export default {
     }
   },
   mounted () {
-    request('https://autumnfish.cn/wx/api/public/v1/home/swiperdata').then(res=>{
+    // request('https://autumnfish.cn/wx/api/public/v1/home/swiperdata').then(res=>{
+    //   this.swiperList=res.data.message
+    // }),
+    // request('https://autumnfish.cn/wx/api/public/v1/home/catitems').then(res=>{
+    //   this.navList=res.data.message
+    // }),
+    // request('https://autumnfish.cn/wx/api/public/v1/home/floordata').then(res=>{
+    //   this.fashionList=res.data.message
+    // })
+    getSwiper().then(res=>{
       this.swiperList=res.data.message
     }),
-    request('https://autumnfish.cn/wx/api/public/v1/home/catitems').then(res=>{
+    getCate().then(res=>{
       this.navList=res.data.message
     }),
-    request('https://autumnfish.cn/wx/api/public/v1/home/floordata').then(res=>{
+    getFloor().then(res=>{
       this.fashionList=res.data.message
     })
   }
@@ -62,24 +71,6 @@ export default {
 <style>
 img,image{
   display: block;
-}
-.header{
-  padding: 15rpx;
-  background-color: #ff2d4a;
-  position: fixed;
-  width:100%;
-  z-index: 10;
-}
-.header .search{
-  width:720rpx;
-  height: 70rpx;
-  font-size: 40rpx;
-  color: #666;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10rpx
 }
 swiper{
   padding-top: 100rpx;

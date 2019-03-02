@@ -18,6 +18,15 @@ function request(url, method = "GET", data = {}, header = {}) {
   })
 }
 
+request.baseURL = "https://autumnfish.cn/wx/api/public/v1/"
+
+request.get = (url, data) => {
+  return request(request.baseURL+url,'GET',data)
+}
+request.post = (url, data) => {
+  return request(request.baseURL+url,'POST',data)
+}
+
 //导出,暴露request函数
 //如果导出的是export default命令,
 //导入使用import request from "路径"
