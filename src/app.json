@@ -9,7 +9,6 @@
     "pages/mine/main",
     "pages/logs/main"  ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff2d4a",
     "navigationBarTitleText": "优购",
     "navigationBarTextStyle": "white"

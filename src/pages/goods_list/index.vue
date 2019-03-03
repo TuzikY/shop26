@@ -50,12 +50,24 @@ export default {
   },
   onLoad(options){
     this.keyword=options.keyword
+    //根据keyword初始化页面
+      this.initSearchList()
+  },
+  onShow(){
+    //onload事件在页面销毁之前只会执行一次,所以从搜索页跳转过来的时候,需要初始化数据
+    this.initDate()
     this.initSearchList()
   },
   //上拉触底事件
   onReachBottom(){
     console.log('上拉触底了');
     this.initSearchList()
+  },
+  //下拉刷新事件
+  onPullDownRefresh(){
+    console.log('下拉刷新了');
+    this.initDate();
+    this.initSearchList();
   },
   methods:{
     // 初始化数据
@@ -80,8 +92,10 @@ export default {
         }
         this.searchList=[...this.searchList,...res.data.message.goods]
         this.pagenum++;
-        wx.hideLoading()
+        wx.hideLoading()//隐藏掉loading图标
+        wx.stopPullDownRefresh();//数据渲染完成后取消掉刷新状态
         console.log(res);
+        console.log(this.searchList);
       })
     },
     //跳转到商品详情页
@@ -106,7 +120,8 @@ export default {
         this.initDate();
         this.initSearchList();
       }
-    }
+    },
+    
   }
 }
 </script>
@@ -185,6 +200,7 @@ export default {
   font-size: 30rpx;
   color: #666;
   text-align: center;
+  margin: 30rpx 0;
 }
 </style>
 

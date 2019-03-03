@@ -14,4 +14,7 @@ export const getCateList = () => request.get('categories')
 export const getSearchList = (obj) => request.get('goods/search', obj)
 
 //获取商品详情页数据
-export const getGoodsDetail=(obj)=>request.get('goods/detail',obj)
+export const getGoodsDetail = (obj) => request.get('goods/detail', obj)
+
+//获取商品建议查询数据
+export const getTips=(obj)=>request.get('goods/qsearch',obj)

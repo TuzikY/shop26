@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText":"商品搜索列表",
   "backgroundColor":"#ccc",
   "enablePullDownRefresh":true,
   "backgroundTextStyle": "dark"
