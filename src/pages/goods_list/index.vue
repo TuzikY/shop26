@@ -7,18 +7,21 @@
           type="search"
           size="20">
         </icon>
-        <input type="text" v-model="keyword" @confirm="initSearchList({query:keyword})">
+        <input type="text" v-model="keyword" @confirm="confirmSearch">
       </div>
       
     </div>
     <!-- 内容部分-->
     <div class="search_content">
+      <!-- tab栏部分 -->
       <div class="search_content_title">
-        <span class='active' >综合</span>
-        <span>销量</span>
-        <span>价格<span class="iconfont icon-shangxia"></span></span>
+        <span @click="changeTab(index)" :class="activated===index?'active':''" v-for="(item,index) in tabList" :key="index">{{item}}
+          <span v-if="index===2" class="iconfont icon-shangxia"></span>
+        </span>
       </div>
+      <!-- 主体内容部分 -->
       <div class="search_content_main">
+        <!-- 商品卡片 -->
         <div class="cards" v-for="(item,index) in searchList" :key="index" @tap="jumpToDetail(item.goods_id)">
           <div class="cards_left"><img :src="item.goods_small_logo" alt=""></div>
           <div class="cards_right">
@@ -26,6 +29,7 @@
             <div class="cards_right_price">￥<span>{{item.goods_price}}</span>.00</div>
           </div>
         </div>
+        <div class="loading" v-if="!hasMore">我也是有底线的...</div>
       </div>
     </div>
   </view>
@@ -36,24 +40,72 @@ import {getSearchList} from '@/api'
 export default {
   data () {
     return {
+      activated:0,
       keyword:'',
       pagenum:1,
-      searchList:[]
+      searchList:[],//页面初始化的数据列表
+      tabList:['综合','销量','价格'],
+      hasMore:true
     }
   },
   onLoad(options){
     this.keyword=options.keyword
-    this.initSearchList({query:this.keyword})
+    this.initSearchList()
+  },
+  //上拉触底事件
+  onReachBottom(){
+    console.log('上拉触底了');
+    this.initSearchList()
   },
   methods:{
+    // 初始化数据
+    initDate(){
+      this.searchList=[];
+      this.pagenum=1;
+      this.hasMore=true;
+    },
     //初始化搜索商品列表页
-    initSearchList(obj){
-      getSearchList(obj).then(res=>{
-        this.searchList=res.data.message.goods
+    initSearchList(){
+      if(!this.hasMore) return;
+      wx.showLoading({
+        title:'加载中'
+      })
+      getSearchList({
+        query:this.keyword,
+        pagenum:this.pagenum
+      }).then(res=>{
+        //如果请求到的长度已经不足20条,hasMore就要取反,代表没有数据了
+        if(res.data.message.goods<20){
+          this.hasMore=false
+        }
+        this.searchList=[...this.searchList,...res.data.message.goods]
+        this.pagenum++;
+        wx.hideLoading()
+        console.log(res);
       })
     },
+    //跳转到商品详情页
     jumpToDetail(keyword){
       wx.navigateTo({ url: '/pages/goods_detail/main'+'?keyword='+keyword });
+    },
+    //tab栏切换事件
+    changeTab(index){
+      this.activated=index
+    },
+    // input框搜索事件
+    confirmSearch(){
+      if(!this.keyword){
+        wx.showToast({
+          title: '输入内容为空!', //提示的内容,
+          icon: 'none', //图标,
+          duration: 1500, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+      }else{
+        this.initDate();
+        this.initSearchList();
+      }
     }
   }
 }
@@ -128,6 +180,11 @@ export default {
 }
 .cards_right_price span{
   font-size: 40rpx;
+}
+.loading{
+  font-size: 30rpx;
+  color: #666;
+  text-align: center;
 }
 </style>
 
