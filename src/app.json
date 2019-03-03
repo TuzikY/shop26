@@ -3,6 +3,8 @@
     "pages/index/main",
     "pages/cart/main",
     "pages/category/main",
+    "pages/goods_list/main",
+    "pages/goods_detail/main",
     "pages/search/main",
     "pages/mine/main",
     "pages/logs/main"  ],

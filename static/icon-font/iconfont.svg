@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="shangxia" unicode="&#58891;" d="M836.8 262.4H187.2c-32 0-51.2-20.8-35.2-36.8 24-25.6 310.4-324.8 324.8-339.2 17.6-19.2 56-16 72 0C560-102.4 854.4 208 872 225.6c16 17.6-4.8 35.2-35.2 36.8zM187.2 505.6h649.6c30.4 0 51.2 19.2 35.2 36.8-17.6 17.6-312 328-324.8 340.8-14.4 16-52.8 17.6-72 0C462.4 867.2 176 568 152 542.4c-16-16 3.2-36.8 35.2-36.8z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
