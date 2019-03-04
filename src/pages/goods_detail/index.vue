@@ -33,6 +33,7 @@
     <!-- 购物车底部tab栏 -->
     <div class="cartTab">
       <div class="sevice">
+        <button open-type="contact">客服</button>
         <i class="iconfont icon-kefu"></i>
         <span>联系客服</span>
       </div>
@@ -40,7 +41,7 @@
         <i class="iconfont icon-gouwuchekong"></i>
         <span>购物车</span>
       </div>
-      <div class="addCart">加入购物车</div>
+      <div class="addCart" @tap="addToCart(id)">加入购物车</div>
       <div class="buyNow">立即购买</div>
     </div>
   </scroll-view>
@@ -66,6 +67,28 @@ export default {
         this.GoodsDetailList=res.data.message
         console.log(this.GoodsDetailList);
       })
+    },
+    //加入购物车
+    addToCart(id){
+      //防止还没获取到数据的时候,点击了购物车
+      if(!id) return;
+      let cartList=wx.getStorageSync('cartList') ||{}
+      if(cartList.goods_id){
+        cartList.num++;
+        wx.setStorageSync('cartList',cartList)
+      }else{
+        cartList=this.GoodsDetailList;
+        cartList.num = 1 ;
+        cartList.selected=true;
+         wx.setStorageSync('cartList',cartList)
+      }
+      wx.showToast({
+        title: '添加成功', //提示的内容,
+        icon: 'success', //图标,
+        duration: 1000, //延迟时间,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
     }
   }
 }
@@ -134,6 +157,14 @@ swiper{
   background-color: #fff;
   div{
     flex: 1
+  }
+  .sevice{
+    position: relative;
+    button{
+      position: absolute;
+      width: 186rpx;
+      opacity: 0;
+    }
   }
   .sevice,.cart{
     font-size: 24rpx;
