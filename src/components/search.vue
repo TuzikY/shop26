@@ -1,10 +1,21 @@
 <template>
-  <div class="header">
+  <div class="header" @click="jumpToSearch">
       <div class="search">
         <icon type="search" size="24"/>搜索
       </div>
     </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    jumpToSearch(){
+      wx.navigateTo({ url: '/pages/search/main'});
+    }
+  }
+}
+</script>
+
 
 <style>
 .header{

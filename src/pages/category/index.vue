@@ -102,7 +102,6 @@ export default {
 .cate_left view.active::after{
   content: '';
   width: 10rpx;
-  height:100%;
   position: absolute;
   top: 10rpx;
   bottom: 10rpx;

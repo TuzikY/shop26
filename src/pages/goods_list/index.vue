@@ -7,7 +7,7 @@
           type="search"
           size="20">
         </icon>
-        <input type="text" v-model="keyword" @confirm="confirmSearch">
+        <input type="text" confirm-type="search" v-model="keyword" @confirm="confirmSearch">
       </div>
       
     </div>
@@ -94,13 +94,13 @@ export default {
         this.pagenum++;
         wx.hideLoading()//隐藏掉loading图标
         wx.stopPullDownRefresh();//数据渲染完成后取消掉刷新状态
-        console.log(res);
-        console.log(this.searchList);
+        // console.log(res);
+        // console.log(this.searchList);
       })
     },
     //跳转到商品详情页
-    jumpToDetail(keyword){
-      wx.navigateTo({ url: '/pages/goods_detail/main'+'?keyword='+keyword });
+    jumpToDetail(id){
+      wx.navigateTo({ url: '/pages/goods_detail/main'+'?id='+id });
     },
     //tab栏切换事件
     changeTab(index){
