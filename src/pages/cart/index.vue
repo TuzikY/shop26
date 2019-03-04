@@ -1,6 +1,7 @@
 <template>
   <div>购物车
     <div>wo </div>
+    <div>no</div>
   </div>
   
 </template>
