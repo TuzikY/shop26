@@ -39,7 +39,7 @@
       </div>
       <div class="cart">
         <i class="iconfont icon-gouwuchekong"></i>
-        <span>购物车</span>
+        <span @tap="jumpToCart">购物车</span>
       </div>
       <div class="addCart" @tap="addToCart(id)">加入购物车</div>
       <div class="buyNow">立即购买</div>
@@ -88,6 +88,10 @@ export default {
         mask: true, //显示透明蒙层，防止触摸穿透,
         success: res => {}
       });
+    },
+    //跳转到购物车页面
+    jumpToCart(){
+      wx.switchTab({ url: '/pages/cart/main' });
     }
   }
 }

@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/cart/main",
+    "pages/pay/main",
     "pages/category/main",
     "pages/goods_list/main",
     "pages/goods_detail/main",

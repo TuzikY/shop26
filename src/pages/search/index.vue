@@ -57,7 +57,6 @@ export default {
     },
     //确认搜索
     confirmSearch(){
-      console.log(typeof this.historyList);
       // 将搜索历史追加到历史列表数组
       this.historyList.unshift(this.inputVal)
       //对数组进行去重处理,new Set去重后得到一个新数组

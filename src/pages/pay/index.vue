@@ -22,7 +22,7 @@
     <!-- 商品卡片 -->
     <div class="goods_card" v-for="(item,index) in cartList" :key="index" @tap="jumpToDetail(item.goods_id)">
       <icon
-        @tap.stop="item.selected = !item.selected"
+        @tap="item.selected = !item.selected"
         type="success"
         :color="item.selected?'red':'gray'"
         size="15"
@@ -35,29 +35,14 @@
             <text>{{item.goods_price}}</text>.00
           </div>
           <div class="goods_price_right">
-            <i class="iconfont icon-jianshao" @tap.stop="changeNum(index,-1)"></i>
+            <i class="iconfont icon-jianshao" @tap="changeNum(index,-1)"></i>
             <span>{{item.num}}</span>
-            <i class="iconfont icon-tianjia" @tap.stop="changeNum(index,1)"></i>
+            <i class="iconfont icon-tianjia" @tap="changeNum(index,1)"></i>
           </div>
         </div>
       </div>
     </div>
-    <!-- 底部结算部分 -->
-    <div class="footer_pay">
-      <icon type="success" :color="computerAll?'red':'gray'" size="15"></icon>
-      <span>全选</span>
-      <div class="center">
-        <div class="center_top">
-          <span>合计:</span>
-          <div>
-            ￥
-            <span>{{allPrice}}</span>.00
-          </div>
-        </div>
-        <div class="center_bottom">包含运费</div>
-      </div>
-      <navigator url="/pages/pay/main" class="pay">结算({{allNum}})</navigator>
-    </div>
+    <!-- 留空 -->
   </div>
 </template>
 
