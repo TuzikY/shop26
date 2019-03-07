@@ -73,15 +73,14 @@ export default {
       //防止还没获取到数据的时候,点击了购物车
       if(!id) return;
       let cartList=wx.getStorageSync('cartList') ||{}
-      if(cartList.goods_id){
-        cartList.num++;
-        wx.setStorageSync('cartList',cartList)
+      if(cartList[id]){
+        cartList[id].num++;
       }else{
-        cartList=this.GoodsDetailList;
-        cartList.num = 1 ;
-        cartList.selected=true;
-         wx.setStorageSync('cartList',cartList)
+        cartList[id]=this.GoodsDetailList;
+        cartList[id].num = 1 ;
+        cartList[id].selected=true;
       }
+      wx.setStorageSync('cartList',cartList)
       wx.showToast({
         title: '添加成功', //提示的内容,
         icon: 'success', //图标,
